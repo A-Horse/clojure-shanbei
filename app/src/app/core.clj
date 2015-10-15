@@ -1,4 +1,5 @@
-(ns app.core)
+(ns app.core
+  (:gen-class))
 
 (defn foo
   "I don't do a whole lot."
@@ -7,8 +8,7 @@
 
 (defn -main 
   "main"
-  [& args]
-  
+  [& args]  
   (println args "hello world!"))
 
 

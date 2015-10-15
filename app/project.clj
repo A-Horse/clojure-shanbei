@@ -1,4 +1,4 @@
-(defproject app "0.1.0-SNAPSHOT"
+(defproject app "0.1.0"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -8,4 +8,6 @@
   :plugins [[lein-environ "1.0.0"]]
   :profiles {:dev {:env {:squiggly {:checkers [:eastwood]
                                     :eastwood-exclude-linters [:unlimited-use]}}}}
-  :main app.core  )
+  :main app.core
+  :aot [app.core]
+  :uberjar {:aot :all})
