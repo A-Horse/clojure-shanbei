@@ -1,16 +1,21 @@
 (ns app.core
-  (:gen-class))
+  (:gen-class)
+  (:use [io.aviso.ansi]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(def cli-prompt "> "
+  "cli prompt")
+
+(def should-exit? false)
+
+(def token-file "~/.shanbay_token")
+
+(def exit-command ["exit" "e"])
 
 (defn -main 
   "main"
-  [& args]  
-  (println args "hello world!"))
-
-
-
-
+  [& args]
+  ;;(println (str (bold (green "➜"))))
+  (loop [input (read-line)]
+    (if-not (some #(= input %) (list exit-command))
+      (println input)
+      (recur (read-line)))))
