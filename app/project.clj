@@ -5,7 +5,8 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [acyclic/squiggly-clojure "0.1.4"]
-                 [io.aviso/pretty "0.1.19"]]
+                 [io.aviso/pretty "0.1.19"]
+                 [org.clojure/tools.logging "0.3.1"]]
   :plugins [[lein-environ "1.0.0"]]
   :profiles {:dev {:env {:squiggly {:checkers [:eastwood]
                                     :eastwood-exclude-linters [:unlimited-use]}}}}
@@ -13,4 +14,5 @@
                    :eastwood-exclude-linters [:unlimited-use]}}
   :main app.core
   :aot [app.core]
+  :jvm-opts ^:replace []
   :uberjar {:aot :all})
