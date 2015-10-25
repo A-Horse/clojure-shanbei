@@ -19,16 +19,24 @@
   (println (str (bold (green app-ascii)))))
 
 (defn print-prompt []
-  (println (str (bold (green cli-prompt)))))
+  (print (str (bold (green cli-prompt)))))
+
+
+
+
+(defn command-control
+  "control the command"
+  []
+  (let [input (read-line)]
+    (print input)))
 
 (defn -main 
   "main"
   [& args]
-  (println cli-prompt)
-  (loop [input (read-line)]
+  (log-info)
+  (print-prompt)
+  (loop [input (command-control)]
     (if-not (some #(= input %) exit-command)
-      (do (println input)
-          (recur (read-line)))
-      (do (println "EXIT")))))
-
-
+      (do (print-prompt)
+          (recur (command-control)))
+      (do (println (str (bold (green "EXIT"))))))))
