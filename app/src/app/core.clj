@@ -9,8 +9,6 @@
 
 (def should-exit? false)
 
-(def token-file "~/.shanbay_token")
-
 (def exit-command ["exit" "q" "quit"])
 
 (def app-ascii "•?((¯°·._.• ȼℓ๏jµя€ $hąɲβą¥ •._.·°¯))؟•")
@@ -29,12 +27,13 @@
     (if-not (some #(= input %) exit-command)
       (do (println input)
           (recur (read-line)))
-      (do (println (str (bold (green "EXIT"))))))))
+      ;;exit
+      (println (str (bold (green "EXIT")))))))
 
 
 
 (defn command-control
   "control the command"
   [command &rset]
-  (let ((input (read-line)))
-    (println input)))
+  
+  )
