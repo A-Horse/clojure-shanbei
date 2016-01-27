@@ -1,8 +1,10 @@
 
 import sqlite3
 import datetime
+import os
 
-dbPath = '/Users/soul/learn-word.db'
+dbFileName = 'learn-word.db'
+dbPath = os.environ['HOME'] + '/' + dbFileName
 
 con = sqlite3.connect(dbPath)
 c = con.cursor()
@@ -54,4 +56,3 @@ def query_word(word):
 
 def close_db():
     con.close()
-
