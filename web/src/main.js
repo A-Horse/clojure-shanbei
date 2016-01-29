@@ -31,6 +31,11 @@ let queryWord = () => {
     
 };
 
-addWord('apple');
+let learnThisWord = (word, status) => {
+    
+};
+
+
+// addWord('appleeee');
 
 console.log('Happly every day!');

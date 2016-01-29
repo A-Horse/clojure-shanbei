@@ -1,6 +1,10 @@
 from flask import Flask, request, send_from_directory
 import json
 
+from sqlite3 import IntegrityError
+
+import learnword
+
 app = Flask('Learn-word',  static_url_path='/static', static_folder='web')
 
 setting = {
@@ -22,11 +26,19 @@ def egg():
 def add_word():
     try:
         word = request.form['word']
-        print word
-        print request.form
-        return 'hi'
+        learnword.add_word(word)
+    except NameError:
+        return json.dumps({'message': 'Can not query this word.', 'status': 1})
+    except IntegrityError:
+        return json.dumps({'message': 'Word already exist.', 'status': 1})
     except:
-        return json.dumps({'error': 'unknown'})
+        raise
+        return json.dumps({'message': 'Unknown', 'status': 1})
+
+
+@app.route('/add', methods=['POST'])
+def modify_word_status():
+    return json.dumps({'message': 'unknown', 'status': 1})
 
 
 if __name__ == '__main__':

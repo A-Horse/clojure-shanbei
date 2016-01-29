@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import requests
 import json
 
@@ -19,6 +19,10 @@ ShanbeiWordApi = 'https://api.shanbay.com/bdc/search/?word='
 def query_shanbei_word(word):
     r = requests.get(ShanbeiWordApi + word)
     jsonData = json.loads(r.text)
+    
+    if jsonData['status_code'] != 0:
+        raise NameError('Not Found this word!')
+    
     data = jsonData['data']
     pronunciations = 'us:' + data['pronunciations']['us'] + ' '\
                      'uk:' + data['pronunciations']['uk']
@@ -29,6 +33,4 @@ def query_shanbei_word(word):
 
 
 
-query_shanbei_word('word')
-
-
+# query_shanbei_word('wwwword')
