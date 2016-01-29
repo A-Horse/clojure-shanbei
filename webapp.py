@@ -1,5 +1,7 @@
-from flask import Flask, request, send_from_directory
+from flask import Flask, request
 import json
+
+import learnword
 
 app = Flask('Learn-word')
 
@@ -7,9 +9,11 @@ setting = {
     'host': 'localhost'
 }
 
+
 @app.route('/')
 def root():
     return app.send_static_file('index.html')
+
 
 @app.route('/add', methods=['POST'])
 def add_word():
@@ -18,6 +22,8 @@ def add_word():
     except:
         return json.dumps({'error': 'unknown'})
 
+
 if __name__ == '__main__':
     app.debug = True
     app.run(setting['host'])
+    

@@ -8,3 +8,7 @@ def add_word(word):
         = query.query_shanbei_word(word)
     db.insert_word(word, definition, shanbay_id=shanbay_id, audio=audio,
                    pronunciations=pronunciations)
+
+
+def get_word():
+    pass

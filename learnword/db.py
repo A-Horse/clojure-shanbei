@@ -1,8 +1,9 @@
-
 import sqlite3
 import datetime
+import os
 
-dbPath = '/Users/soul/learn-word.db'
+dbFileName = 'learnword.db'
+dbPath = os.environ['HOME'] + '/' + dbFileName
 
 con = sqlite3.connect(dbPath)
 c = con.cursor()
@@ -24,7 +25,7 @@ def create_db():
 
 
 def delete_table(table):
-    c.execute('DELETE FROM ' + table + ';')
+    c.execute('DROP TABLE IF EXISTS ' + table + ';')
 
 
 def delete_db():
@@ -40,10 +41,9 @@ def count_table_row(table):
 def insert_word(word, definition, **kwargs):
     t = (word, definition, kwargs['shanbay_id'], kwargs['audio'],
          kwargs['pronunciations'], datetime.datetime.now())
-    c.execute('INSERT INTO word ('
-              + 'word, definition, shanbay_id, audio, '
-              + 'pronunciations, add_date' + ')'
-              + ' VALUES (?, ?, ?, ?, ?, ?);', t)
+    c.execute('''INSERT INTO word
+    (word, definition, shanbay_id, audio, pronunciations, add_date)
+    VALUES (?, ?, ?, ?, ?, ?);''', t)
     con.commit()
 
 
@@ -55,3 +55,11 @@ def query_word(word):
 def close_db():
     con.close()
 
+
+def close_cursor():
+    c.close()
+
+
+def get_word_where_state(status, limit=1):
+    c.execute('SELECT * from word where status = ? ORDER BY RANDOM() LIMIT ?;', [status, limit])
+    return c.fetchone()
