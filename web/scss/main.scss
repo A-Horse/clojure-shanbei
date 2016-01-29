@@ -1,0 +1,23 @@
+@import "./mixin/layout.scss";
+@import "./mixin/shadow.scss";
+@import "./mixin/shape.scss";
+@import "./mixin/position.scss";
+@import "./common.scss";
+
+
+@import "./type.scss";
+
+html, body {
+    @include full;
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    display: none; 
+}
+
+.screen {
+    width: 100%;
+    position: relative;
+}
