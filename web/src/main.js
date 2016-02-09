@@ -13,7 +13,7 @@ let apiAddress = (path) => {
 
 let addWord = (word, cb) => {
     $.ajax({
-        url: apiAddress('add'),
+        url: apiAddress('word'),
         method: 'POST',
         data: {
             word: word
@@ -27,15 +27,23 @@ let addWord = (word, cb) => {
     });
 };
 
-let queryWord = () => {
-    
+let getToLearnWord = () => {
+    $.ajax({
+        url: apiAddress('word'),
+        method: 'GET',
+        dataType: 'json',
+        success: (data) => {
+            console.log(data);
+        },
+        error: (xhr) => {
+            
+        }
+    });
 };
 
-let learnThisWord = (word, status) => {
-    
-};
+//getToLearnWord();
 
 
-// addWord('appleeee');
+addWord('raspberry');
 
 console.log('Happly every day!');

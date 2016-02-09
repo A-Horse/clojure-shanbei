@@ -11,7 +11,12 @@ audio TEXT,
 pronunciations TEXT);
 
 DROP TABLE IF EXISTS learning_word;
-CREATE TABLE IF NO EXISTS learning_word (
+CREATE TABLE IF NOT EXISTS learning_word (
 word TEXT PRIMARY KEY,
-status INTEGER
+status INTEGER DEFAULT 0
+);
+
+DROP TABLE IF EXISTS learning_date_trace;
+CREATE TABLE IF NOT EXISTS learning_date_trace (
+learning_date DATETIME UNIQUE
 );
