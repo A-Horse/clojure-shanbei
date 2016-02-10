@@ -10,6 +10,9 @@ dbPath = os.environ['HOME'] + '/' + dbFileName
 
 MAX_LEARNING_STATUS = 3
 
+# 之所以每个方法都启动一个连接是因为想把这个地方模块化
+# Flask调用的时候对全局变量调用不方便，又不考虑性能问题，所以只能牺牲性
+
 
 def check_db_exist():
     return os.path.isfile(dbPath)
@@ -97,7 +100,10 @@ def get_word_where_status(status, limit):
     return result
 
 
-def query_leaning_word(word):
+##################
+# Learning_word
+##################
+def query_learning_word(word):
     con = sqlite3.connect(dbPath)
     c = con.cursor()
     c.execute('SELECT * from learning_word where word = ?;', [word])
@@ -107,10 +113,20 @@ def query_leaning_word(word):
     return result
 
 
-def get_leaning_word(n):
+def get_lowest_learning_word_status():
     con = sqlite3.connect(dbPath)
     c = con.cursor()
-    c.execute('SELECT * from learning_word ORDER BY random() LIMIT ?;', [n])
+    c.execute('SELECT status from learning_word order by status asc limit 1;')
+    result = c.fetchone()
+    c.close()
+    con.close()
+    return result[0]
+
+
+def get_learning_word(n, status=0):
+    con = sqlite3.connect(dbPath)
+    c = con.cursor()
+    c.execute('SELECT * from learning_word where status = ? ORDER BY random() LIMIT ?;', [status, n])
     result = c.fetchone()
     c.close()
     con.close()
@@ -171,12 +187,12 @@ def get_last_date():
     c = con.cursor()
     c.execute(
         'SELECT * from learning_date_trace ' +
-        'ORDER BY learning_date asc limit 1;'
+        'ORDER BY learning_date desc limit 1;'
     )
     result = c.fetchone()
     c.close()
     con.close()
-    return result
+    return result[0]
 
 
 def reset_learning_word_status():

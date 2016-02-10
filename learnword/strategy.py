@@ -2,14 +2,12 @@
 import learnword.db as db
 import time
 
-
 def export_to_learning_words(n):
     words = db.get_word_where_status(0, n)
     for word in words:
         db.add_learning_word(word[0])
         db.change_word_status(word[0], 1)
     return words
-
 
 # def get_leaning_word(n):
 #     pass

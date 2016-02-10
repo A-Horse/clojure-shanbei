@@ -46,7 +46,11 @@ def add_word():
 @app.route('/word', methods=['PUT'])
 def modify_learning_word_status():
     word = request.form['word']
-    learnword.learnword
+    learnword.learning_word_up(word)
+    return json.dumps({
+        'status': 0,
+        'message': 'Up successfully!'
+    })
 
 
 @app.route('/word', methods=['GET'])
