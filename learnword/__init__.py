@@ -37,4 +37,14 @@ def reset_learning_word_status():
         db.reset_learning_word_status()
 
 
+def learning_word_up(word):
+    word = db.get_learning_word(word)
+    if word[1] == MAX_LEARNING_STATUS:
+        db.delete_learning_word(word)
+        return 0
+    else:
+        db.change_learning_word_status(word, word[1] + 1)
+        return word[1] + 1
+
+
 check_db_create()

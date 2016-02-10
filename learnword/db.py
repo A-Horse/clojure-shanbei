@@ -8,6 +8,8 @@ import os.path
 dbFileName = 'learn-word.db'
 dbPath = os.environ['HOME'] + '/' + dbFileName
 
+MAX_LEARNING_STATUS = 3
+
 
 def check_db_exist():
     return os.path.isfile(dbPath)

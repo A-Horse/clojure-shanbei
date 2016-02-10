@@ -45,7 +45,8 @@ def add_word():
 
 @app.route('/word', methods=['PUT'])
 def modify_learning_word_status():
-    pass
+    word = request.form['word']
+    learnword.learnword
 
 
 @app.route('/word', methods=['GET'])

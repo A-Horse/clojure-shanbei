@@ -2,8 +2,6 @@
 import learnword.db as db
 import time
 
-MAX_LEARNING_STATUS = 3
-
 
 def export_to_learning_words(n):
     words = db.get_word_where_status(0, n)
@@ -15,16 +13,6 @@ def export_to_learning_words(n):
 
 # def get_leaning_word(n):
 #     pass
-
-
-def learning_word_up(word):
-    word = db.get_learning_word(word)
-    if word[1] == MAX_LEARNING_STATUS:
-        db.delete_learning_word(word)
-        return 0
-    else:
-        db.change_learning_word_status(word, word[1] + 1)
-        return word[1] + 1
 
 
 def check_new_day():
